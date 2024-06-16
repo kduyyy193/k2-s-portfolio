@@ -1,0 +1,20 @@
+---
+import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+---
+
+<header class="lg:flex p-5 gap-5">
+  <Astronav>
+    <div class="flex w-full justify-between text-3xl">
+      <a href="/" class="tracking-widest">K2</a>
+      <div class="block lg:hidden"><MenuIcon class="w-[30px] h-[30px] text-white" /></div>
+    </div>
+    <MenuItems class="hidden lg:flex">
+      <ul class="flex flex-col lg:flex-row lg:gap-5 text-xl mt-2 md:mt-0">
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </MenuItems>
+  </Astronav>
+</header>

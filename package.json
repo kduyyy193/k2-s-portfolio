@@ -1,0 +1,21 @@
+{
+  "name": "portfolio",
+  "description": "This is a simple portfolio with Astor JS. Feel free to experiment and add your own touch to it. Cheers 🍻",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^3.1.1",
+    "astro": "^2.3.2",
+    "astro-navbar": "^1.2.0",
+    "astro-seo": "^0.7.2",
+    "tailwindcss": "^3.3.2",
+    "typed.js": "^2.0.15"
+  }
+}

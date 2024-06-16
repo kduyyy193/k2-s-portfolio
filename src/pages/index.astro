@@ -1,0 +1,76 @@
+---
+import whoami from "../constants";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title={`${whoami.name} Portfolio Site`}
+  seoTitle={`${whoami.name}, ${whoami.jobTitle} Portfolio`}
+  seoDesc={`${whoami.jobTitle} who expertise in Astro, React, NextJS`}
+>
+  <div id="hello" class="w-8/12 md:w-6/12 mx-auto mt-8">
+    <img
+      class="mx-auto w-96 h-96 mb-8 max-w-screen object-cover sm:object-fill relative border-2 border-gray-100 overflow-hidden animate-[morph_6s_ease-in-out_infinite]"
+      alt="AVATAR"
+      src={whoami.avatar}
+    />
+    <h1
+      class="text-5xl my-8 md:text-6xl text-center drop-shadow-[0px_35px_35px_rgba(39,131,245,0.8)]"
+    >
+      Hey 👋, I am {whoami.name}
+    </h1>
+    <div id="typed-strings">
+      <p>I am a <strong>{whoami.jobTitle}</strong></p>
+      <p>I <em>work</em> with Astro, React, NextJS and more...</p>
+    </div>
+    <div class="text-center mt-6"><span id="typed"></span></div>
+  </div>
+
+  <div id="skills" class="mx-auto w-fit">
+    <p
+      class="border-b-2 border-opacity-50 border-gray-700 w-fit mt-8 mb-6 mx-auto text-white"
+    >
+      Tech Stack
+    </p><div class="logos">
+      <ul class="flex items-center justify-center gap-12 flex-wrap mx-8">
+        <li>
+          <img
+            src="https://skillicons.dev/icons?i=html,css"
+            alt="skill-icon"
+            class="h-16 transition-all duration-300 ease-in-out hover:-translate-y-4"
+          />
+        </li>
+        <li>
+          <img
+            src="https://skillicons.dev/icons?i=js,ts"
+            alt="skill-icon"
+            class="h-16 transition-all duration-300 ease-in-out hover:-translate-y-4"
+          />
+        </li>
+        <li>
+          <img
+            src="https://skillicons.dev/icons?i=react,next"
+            alt="skill-icon"
+            class="h-16 transition-all duration-300 ease-in-out hover:-translate-y-4"
+          />
+        </li>
+        <li>
+          <img
+            src="https://skillicons.dev/icons?i=tailwind,scss"
+            alt="skill-icon"
+            class="h-16 transition-all duration-300 ease-in-out hover:-translate-y-4"
+          />
+        </li>
+      </ul>
+    </div>
+  </div>
+</MainLayout>
+
+<script>
+  import Typed from "typed.js";
+  new Typed("#typed", {
+    stringsElement: "#typed-strings",
+    typeSpeed: 50,
+    loop: true,
+  });
+</script>
