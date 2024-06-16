@@ -1,6 +1,3 @@
-# Astro Portfolio By Oliver
-
-![astro_thumn](https://user-images.githubusercontent.com/32399333/235362624-7c1e5ae2-fb28-4a79-b812-c51217a15f65.png)
 
 ## 🧞 Commands
 
