@@ -1,0 +1,133 @@
+---
+import type { SideProject } from "../../data/portfolio";
+import { formatPeriod } from "../../utils/period";
+
+interface Props {
+  project: SideProject;
+  index: number;
+  accentColor: string;
+  periodBg: string;
+}
+
+const { project, index, accentColor, periodBg } = Astro.props;
+const periodLabel = formatPeriod(project.period, project.periodLabel);
+const rowClass = periodLabel ? "timeline-row" : "timeline-row timeline-row--no-date";
+---
+
+<div
+  class={`${rowClass} animate-fade-in side-project-entry mb-4`}
+  style={`animation-delay: ${index * 0.1}s`}
+  data-project-id={project.id}
+>
+  {
+    periodLabel && (
+      <button
+        type="button"
+        class="timeline-period-btn timeline-toggle inline-flex items-center px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer overflow-hidden"
+        style={`background-color: ${periodBg}; color: #374151`}
+        aria-label="Toggle project details"
+        data-toggle-for={project.id}
+      >
+        <span class="text-xs font-extrabold whitespace-nowrap tracking-wide text-gray-900">
+          {periodLabel}
+        </span>
+    <span
+      class="toggle-icon absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border-2 flex items-center justify-center bg-white"
+      style={`border-color: ${accentColor}; box-shadow: 0 0 10px rgba(54, 212, 153, 0.45)`}
+    >
+      <svg
+        class="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        style={`color: ${accentColor}`}
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="4"
+          d="M12 4v16m8-8H4"
+        />
+      </svg>
+    </span>
+      </button>
+    )
+  }
+
+  <div class="timeline-card">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 mb-0 w-full">
+        <h3 class="text-lg font-extrabold mb-1" style={`color: ${accentColor}`}>
+          {project.title}
+        </h3>
+        {periodLabel && (
+          <p class="text-sm text-gray-600 dark:text-gray-400 m-0 mb-0">{periodLabel}</p>
+        )}
+
+        <div
+          class="experience-card-content overflow-hidden pt-4"
+          data-content-for={project.id}
+          style="max-height: 2000px; opacity: 1"
+        >
+          {
+            project.details && (
+              <div class="mb-6">
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">
+                  App Details
+                </h4>
+                <ul
+                  class="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm theme-marker"
+                  style={`--marker-color: ${accentColor}`}
+                >
+                  {project.details.map((item) => <li>{item}</li>)}
+                </ul>
+              </div>
+            )
+          }
+          {
+            project.responsibilities && (
+              <div class="mb-6">
+                <h4 class="text-base font-bold mb-2" style={`color: ${accentColor}`}>
+                  Development Responsibilities
+                </h4>
+                <ul
+                  class="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm theme-marker"
+                  style={`--marker-color: ${accentColor}`}
+                >
+                  {project.responsibilities.map((item) => <li>{item}</li>)}
+                </ul>
+              </div>
+            )
+          }
+          {
+            project.links && project.links.length > 0 && (
+              <div>
+                <h4 class="text-base font-bold text-gray-900 dark:text-white mb-2">
+                  Links
+                </h4>
+                <ul
+                  class="list-disc list-inside space-y-1 text-sm theme-marker"
+                  style={`--marker-color: ${accentColor}`}
+                >
+                  {
+                    project.links.map((link) => (
+                      <li>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:underline"
+                          style={`color: ${accentColor}`}
+                        >
+                          {link.label}: {link.url}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+</div>

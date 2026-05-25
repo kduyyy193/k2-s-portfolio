@@ -1,0 +1,73 @@
+---
+import { experiences } from "../../data/portfolio";
+import { formatPeriod } from "../../utils/period";
+import ExperienceCard from "./ExperienceCard.astro";
+
+const accentColor = "#38BFF7";
+const periodBg = "#E8F4FF";
+---
+
+<section class="relative mb-16 experience-timeline hidden lg:block w-full max-w-none">
+  <h2
+    class="text-4xl font-bold mb-4 -mt-5 -ml-6"
+    style={`color: ${accentColor}`}
+  >
+    EXPERIENCES
+  </h2>
+  <div class="relative timeline-track">
+    <div
+      class="timeline-line absolute top-0 bottom-0 w-1"
+      style={`background-color: ${accentColor}; box-shadow: 0 0 8px rgba(55, 190, 247, 0.45), 0 0 16px rgba(55, 190, 247, 0.35)`}
+    />
+    <div class="timeline-items space-y-8">
+      {
+        experiences.map((exp, i) => (
+          <ExperienceCard
+            experience={exp}
+            index={i}
+            accentColor={accentColor}
+            periodBg={periodBg}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="lg:hidden mb-12">
+  <h2 class="text-3xl font-bold mb-6" style={`color: ${accentColor}`}>
+    EXPERIENCES
+  </h2>
+  <div class="space-y-6">
+    {
+      experiences.map((exp, i) => (
+        <div class="animate-fade-in" style={`animation-delay: ${i * 0.1}s`}>
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-5 shadow-sm">
+            <h3 class="text-lg font-extrabold mb-1" style={`color: ${accentColor}`}>
+              {exp.title}
+            </h3>
+            {
+              formatPeriod(exp.period, exp.periodLabel) && (
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  {formatPeriod(exp.period, exp.periodLabel)}
+                </p>
+              )
+            }
+            {
+              exp.built && (
+                <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300 list-none p-0 m-0">
+                  {exp.built.slice(0, 3).map((item) => (
+                    <li class="flex gap-2">
+                      <span class="text-red-500">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

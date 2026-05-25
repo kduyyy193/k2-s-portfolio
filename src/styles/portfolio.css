@@ -1,0 +1,123 @@
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 3px;
+}
+
+.dark .sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.timeline-track {
+  --timeline-period-width: 12rem;
+  --timeline-line-left: 10.5rem;
+}
+
+.timeline-line {
+  border-radius: 2px;
+  left: var(--timeline-line-left);
+}
+
+.timeline-items {
+  width: 100%;
+}
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: var(--timeline-period-width) minmax(0, 1fr);
+  column-gap: 1.75rem;
+  align-items: start;
+  width: 100%;
+}
+
+.timeline-row--no-date {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.timeline-period-btn {
+  position: relative;
+  z-index: 20;
+  width: var(--timeline-period-width);
+  justify-self: end;
+  padding-right: 2.75rem;
+  min-height: 2.25rem;
+}
+
+.timeline-card {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.experience-card-content {
+  transition:
+    max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s ease-in-out;
+}
+
+.experience-card-content.collapsed {
+  max-height: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.toggle-icon svg {
+  transition: transform 0.3s ease;
+}
+
+.toggle-icon.collapsed svg {
+  transform: rotate(45deg);
+}
+
+.theme-marker li::marker {
+  color: var(--marker-color, #38bff7);
+}
+
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.dark .icon-badge {
+  background: #1f2937;
+}
+
+.icon-badge:hover {
+  transform: scale(1.05);
+}
+
+.sidebar-action-btn {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.avatar-modal.flex {
+  display: flex;
+}

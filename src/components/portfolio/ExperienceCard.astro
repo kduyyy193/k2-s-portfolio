@@ -1,0 +1,291 @@
+---
+import type { Experience } from "../../data/portfolio";
+import { formatPeriod } from "../../utils/period";
+
+interface Props {
+  experience: Experience;
+  index: number;
+  accentColor: string;
+  periodBg: string;
+}
+
+const { experience, index, accentColor, periodBg } = Astro.props;
+const periodLabel = formatPeriod(experience.period, experience.periodLabel);
+const hasStores = experience.appStoreUrl || experience.playStoreUrl;
+const rowClass = periodLabel ? "timeline-row" : "timeline-row timeline-row--no-date";
+---
+
+<div
+  class={`${rowClass} animate-fade-in experience-entry mb-4`}
+  style={`animation-delay: ${index * 0.1}s`}
+  data-experience-id={experience.id}
+>
+  {
+    periodLabel && (
+      <button
+        type="button"
+        class="timeline-period-btn timeline-toggle inline-flex items-center px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer overflow-hidden"
+        style={`background-color: ${periodBg}; color: #374151`}
+        aria-label="Toggle experience details"
+        data-toggle-for={experience.id}
+      >
+        <span class="text-xs font-extrabold whitespace-nowrap tracking-wide text-gray-900">
+          {periodLabel}
+        </span>
+        <span
+          class="toggle-icon absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border-2 flex items-center justify-center bg-white"
+          style={`border-color: ${accentColor}; box-shadow: 0 0 10px ${accentColor}73`}
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            style={`color: ${accentColor}`}
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="4"
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
+        </span>
+      </button>
+    )
+  }
+
+  <div class="timeline-card">
+    <div
+      class="project-card bg-white dark:bg-gray-800 rounded-lg p-6 mb-0 transition-all duration-300 border-2 border-transparent w-full"
+    >
+        <div class="mb-2">
+          <h3 class="text-lg font-extrabold" style={`color: ${accentColor}`}>
+            {experience.title}
+            {experience.subtitle && ` (${experience.subtitle})`}
+          </h3>
+          {periodLabel && (
+            <p class="text-sm text-gray-600 dark:text-gray-400 m-0">{periodLabel}</p>
+          )}
+        </div>
+
+        <div
+          class="experience-card-content overflow-hidden"
+          data-content-for={experience.id}
+          style="max-height: 2000px; opacity: 1"
+        >
+          {
+            hasStores && (
+              <div class="flex flex-wrap gap-3 mb-4">
+                {
+                  experience.appStoreUrl && (
+                    <a
+                      href={experience.appStoreUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center gap-2 px-4 py-2.5 bg-black text-white rounded-lg font-medium hover:bg-gray-800"
+                    >
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+                      </svg>
+                      <span>App Store</span>
+                    </a>
+                  )
+                }
+                {
+                  experience.playStoreUrl && (
+                    <a
+                      href={experience.playStoreUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center gap-2 px-4 py-2.5 bg-white text-gray-900 border border-gray-300 rounded-lg font-medium hover:bg-gray-50"
+                    >
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5Z" fill="#00D9FF" />
+                        <path d="M16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12Z" fill="#00F076" />
+                        <path d="M3.84 2.15L13.69 12L3.84 21.85L6.05 21.34L16.81 15.12L14.54 12.85L6.05 2.66L3.84 2.15Z" fill="#FFD23F" />
+                        <path d="M16.81 15.12L20.16 13.06C20.67 12.74 21 12.39 21 12C21 11.61 20.67 11.26 20.16 10.94L16.81 8.88L14.54 11.15L16.81 15.12Z" fill="#FF3A44" />
+                      </svg>
+                      <span>Google Play</span>
+                    </a>
+                  )
+                }
+              </div>
+            )
+          }
+
+          {
+            experience.screenshots && experience.screenshots.length > 0 && (
+              <div class="flex justify-center mb-4">
+                <div
+                  class="flex gap-2 p-2 rounded-xl flex-wrap justify-center"
+                  style="box-shadow: 0 10px 30px rgba(0,0,0,0.12); background: radial-gradient(circle at center, rgba(0,0,0,0.04) 0%, transparent 70%)"
+                >
+                  {
+                    experience.screenshots.map((shot) => (
+                      <div
+                        class="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex-1"
+                        style={`aspect-ratio: ${shot.aspect === "9/16" ? "9/16" : "4/3"}; max-width: ${shot.aspect === "9/16" ? "120px" : "200px"}`}
+                      >
+                        <img
+                          src={shot.src}
+                          alt={shot.alt}
+                          class={`w-full h-full ${shot.aspect === "9/16" ? "object-cover" : "object-contain"}`}
+                          loading="lazy"
+                        />
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+            )
+          }
+
+          <div class="grid md:grid-cols-2 gap-6 pt-2">
+            <div class="space-y-6">
+              {
+                experience.applications && (
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                      <span class="text-lg" style={`color: ${accentColor}`}>◆</span>
+                      Applications
+                    </h4>
+                    <ul class="space-y-1.5 text-gray-700 dark:text-gray-300 text-[15px] list-none p-0 m-0">
+                      {
+                        experience.applications.map((item) => (
+                          <li class="flex items-start gap-2">
+                            <span style={`color: ${accentColor}`} class="mt-0.5">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                )
+              }
+              {
+                experience.built && (
+                  <div>
+                    <h4 class="text-base font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                      <span class="text-lg text-red-500">◆</span>
+                      What I Built
+                    </h4>
+                    <ul class="space-y-1.5 text-gray-700 dark:text-gray-300 text-[15px] list-none p-0 m-0">
+                      {
+                        experience.built.map((item) => (
+                          <li class="flex items-start gap-2">
+                            <span class="text-red-500 mt-0.5">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                )
+              }
+            </div>
+
+            <div class="space-y-6">
+              {
+                experience.users && (
+                  <div>
+                    <h4 class="text-base font-bold text-gray-900 dark:text-white mb-2">
+                      Users
+                    </h4>
+                    <ul class="space-y-1.5 text-gray-700 dark:text-gray-300 text-[15px] list-none p-0 m-0 mb-4">
+                      {
+                        experience.users.map((item) => (
+                          <li class="flex items-start gap-2">
+                            <span style={`color: ${accentColor}`} class="mt-0.5">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                )
+              }
+
+              {
+                experience.stats && (
+                  <div class="bg-[#E6F4FF] dark:bg-blue-900/30 rounded-lg p-4 mb-2">
+                    <div class="grid grid-cols-3 gap-3">
+                      {
+                        experience.stats.map((stat) => (
+                          <div class="text-center">
+                            <div class="text-xl font-bold" style={`color: ${accentColor}`}>
+                              {stat.value}
+                            </div>
+                            <div class="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                              {stat.label}
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
+                    {
+                      experience.statsNote && (
+                        <p class="text-xs text-gray-600 dark:text-gray-400 mt-3 text-center m-0">
+                          {experience.statsNote}
+                        </p>
+                      )
+                    }
+                  </div>
+                )
+              }
+
+              {
+                experience.highlights && (
+                  <div class="bg-[#E6F4FF] dark:bg-blue-900/30 rounded-lg p-4">
+                    <ul class="space-y-1.5 text-gray-700 dark:text-gray-300 text-[15px] list-none p-0 m-0">
+                      {
+                        experience.highlights.map((item) => (
+                          <li class="flex items-start gap-2">
+                            <svg
+                              class="w-4 h-4 mt-0.5 flex-shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              style={`color: ${accentColor}`}
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="3"
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                            <span>{item}</span>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                )
+              }
+
+              {
+                experience.team && (
+                  <div>
+                    <h4 class="text-base font-bold text-gray-900 dark:text-white mb-2">
+                      Team
+                    </h4>
+                    <ul class="space-y-1.5 text-gray-700 dark:text-gray-300 text-[15px] list-none p-0 m-0">
+                      {
+                        experience.team.map((item) => (
+                          <li class="flex items-start gap-2">
+                            <span style={`color: ${accentColor}`} class="mt-0.5">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                )
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

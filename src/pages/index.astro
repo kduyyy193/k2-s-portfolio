@@ -1,76 +1,46 @@
 ---
-import whoami from "../constants";
-import MainLayout from "../layouts/MainLayout.astro";
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
+import Sidebar from "../components/portfolio/Sidebar.astro";
+import ExperienceTimeline from "../components/portfolio/ExperienceTimeline.astro";
+import SideProjectTimeline from "../components/portfolio/SideProjectTimeline.astro";
+import { profile } from "../data/portfolio";
 ---
 
-<MainLayout
-  title={`${whoami.name} Portfolio Site`}
-  seoTitle={`${whoami.name}, ${whoami.jobTitle} Portfolio`}
-  seoDesc={`${whoami.jobTitle} who expertise in Astro, React, NextJS`}
->
-  <div id="hello" class="w-8/12 md:w-6/12 mx-auto mt-8">
-    <img
-      class="mx-auto w-96 h-96 mb-8 max-w-screen object-cover sm:object-fill relative border-2 border-gray-100 overflow-hidden animate-[morph_6s_ease-in-out_infinite]"
-      alt="AVATAR"
-      src={whoami.avatar}
-    />
-    <h1
-      class="text-5xl my-8 md:text-6xl text-center drop-shadow-[0px_35px_35px_rgba(39,131,245,0.8)]"
+<PortfolioLayout>
+  <div class="flex flex-col lg:flex-row min-h-screen">
+    <Sidebar />
+    <main
+      class="flex-1 min-w-0 w-full p-6 lg:py-10 lg:px-8 xl:px-10 transition-colors duration-300 animate-fade-in bg-[#F3F4F6] dark:bg-gray-950 min-h-screen"
     >
-      Hey 👋, I am {whoami.name}
-    </h1>
-    <div id="typed-strings">
-      <p>I am a <strong>{whoami.jobTitle}</strong></p>
-      <p>I <em>work</em> with Astro, React, NextJS and more...</p>
-    </div>
-    <div class="text-center mt-6"><span id="typed"></span></div>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6 lg:hidden text-center">
+        {profile.name} · {profile.title}
+      </p>
+      <ExperienceTimeline />
+      <SideProjectTimeline />
+      <footer class="text-center py-8 text-sm text-gray-500 dark:text-gray-400">
+        © {new Date().getFullYear()} {profile.name}. All rights reserved.
+      </footer>
+    </main>
   </div>
-
-  <div id="skills" class="mx-auto w-fit">
-    <p
-      class="border-b-2 border-opacity-50 border-gray-700 w-fit mt-8 mb-6 mx-auto text-white"
-    >
-      Tech Stack
-    </p><div class="logos">
-      <ul class="flex items-center justify-center gap-12 flex-wrap mx-8">
-        <li>
-          <img
-            src="https://skillicons.dev/icons?i=html,css"
-            alt="skill-icon"
-            class="h-16 transition-all duration-300 ease-in-out hover:-translate-y-4"
-          />
-        </li>
-        <li>
-          <img
-            src="https://skillicons.dev/icons?i=js,ts"
-            alt="skill-icon"
-            class="h-16 transition-all duration-300 ease-in-out hover:-translate-y-4"
-          />
-        </li>
-        <li>
-          <img
-            src="https://skillicons.dev/icons?i=react,next"
-            alt="skill-icon"
-            class="h-16 transition-all duration-300 ease-in-out hover:-translate-y-4"
-          />
-        </li>
-        <li>
-          <img
-            src="https://skillicons.dev/icons?i=tailwind,scss"
-            alt="skill-icon"
-            class="h-16 transition-all duration-300 ease-in-out hover:-translate-y-4"
-          />
-        </li>
-      </ul>
-    </div>
-  </div>
-</MainLayout>
+</PortfolioLayout>
 
 <script>
-  import Typed from "typed.js";
-  new Typed("#typed", {
-    stringsElement: "#typed-strings",
-    typeSpeed: 50,
-    loop: true,
-  });
+  function setupTimelineToggles() {
+    document.querySelectorAll(".timeline-toggle").forEach((button) => {
+      button.addEventListener("click", () => {
+        const id = button.getAttribute("data-toggle-for");
+        if (!id) return;
+        const content = document.querySelector(
+          `[data-content-for="${id}"]`
+        ) as HTMLElement | null;
+        const icon = button.querySelector(".toggle-icon");
+        if (!content) return;
+        const collapsed = content.classList.toggle("collapsed");
+        icon?.classList.toggle("collapsed", collapsed);
+      });
+    });
+  }
+
+  setupTimelineToggles();
+  document.addEventListener("astro:page-load", setupTimelineToggles);
 </script>

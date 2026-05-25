@@ -1,0 +1,70 @@
+---
+import { sideProjects } from "../../data/portfolio";
+import { formatPeriod } from "../../utils/period";
+import SideProjectCard from "./SideProjectCard.astro";
+
+const accentColor = "#36D499";
+const periodBg = "#E6F9F0";
+---
+
+<section class="relative side-project-timeline hidden lg:block w-full max-w-none">
+  <h2
+    class="text-4xl font-bold mb-4 mt-10 -ml-6"
+    style={`color: ${accentColor}`}
+  >
+    SIDE PROJECTS
+  </h2>
+  <div class="relative timeline-track">
+    <div
+      class="timeline-line absolute top-0 bottom-0 w-1"
+      style={`background-color: ${accentColor}; box-shadow: 0 0 8px rgba(54, 212, 153, 0.5), 0 0 16px rgba(54, 212, 153, 0.4)`}
+    />
+    <div class="timeline-items space-y-8">
+      {
+        sideProjects.map((project, i) => (
+          <SideProjectCard
+            project={project}
+            index={i}
+            accentColor={accentColor}
+            periodBg={periodBg}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="lg:hidden mb-12">
+  <h2 class="text-3xl font-bold mb-6 mt-8" style={`color: ${accentColor}`}>
+    SIDE PROJECTS
+  </h2>
+  <div class="space-y-6">
+    {
+      sideProjects.map((project, i) => (
+        <div class="animate-fade-in" style={`animation-delay: ${i * 0.1}s`}>
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-5 shadow-sm">
+            <h3 class="text-lg font-extrabold mb-1" style={`color: ${accentColor}`}>
+              {project.title}
+            </h3>
+            {
+              formatPeriod(project.period, project.periodLabel) && (
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  {formatPeriod(project.period, project.periodLabel)}
+                </p>
+              )
+            }
+            {
+              project.responsibilities && (
+                <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300 list-none p-0 m-0">
+                  {project.responsibilities.slice(0, 2).map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )
+            }
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
