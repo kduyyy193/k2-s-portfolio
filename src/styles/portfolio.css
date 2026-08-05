@@ -55,6 +55,7 @@
 .timeline-period-btn {
   position: relative;
   z-index: 20;
+  grid-column: 1;
   width: var(--timeline-period-width);
   justify-self: end;
   padding-right: 2.75rem;
@@ -62,6 +63,7 @@
 }
 
 .timeline-card {
+  grid-column: 2;
   min-width: 0;
   width: 100%;
   max-width: 100%;
@@ -85,6 +87,18 @@
 
 .toggle-icon.collapsed svg {
   transform: rotate(45deg);
+}
+
+.card-toggle-btn {
+  margin-top: 0.125rem;
+}
+
+.exp-tint-box {
+  background-color: color-mix(in srgb, var(--tint) 12%, white);
+}
+
+.dark .exp-tint-box {
+  background-color: color-mix(in srgb, var(--tint) 24%, #111827);
 }
 
 .theme-marker li::marker {

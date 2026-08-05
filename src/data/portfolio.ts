@@ -8,6 +8,7 @@ export type Experience = {
   subtitle?: string;
   period?: Period;
   periodLabel?: string;
+  accentColor?: string;
   appStoreUrl?: string;
   playStoreUrl?: string;
   screenshots?: { src: string; alt: string; aspect: "4/3" | "9/16" }[];
@@ -37,9 +38,9 @@ export const profile = {
   avatar: "/images/avatar.png",
   avatarPosition: "50% 20%",
   about:
-    "Fullstack Software Engineer with 3+ years of experience building production systems across AI platforms, POS, social products, and ERP. Strong in NestJS, React, Next.js, and data-intensive backends—with focus on scalability, multi-tenant design, and low-latency real-time workflows.",
-  phone: "+84 879 901 903",
-  phoneTel: "tel:+84879901903",
+    "Software Engineer with 3+ years of experience building production systems across AI agent platforms, POS, social products, and ERP. Skilled in NestJS, React/Next.js, and data-intensive backends—with focus on hybrid retrieval (Knowledge Graph + vector search), multi-tenant architecture, and real-time, resilient workflows.",
+  phone: "+84 985 308 170",
+  phoneTel: "tel:+84985308170",
   linkedin: "",
   github: "https://github.com/kduyyy193",
   email: "kduyyy193.for.dev@gmail.com",
@@ -47,7 +48,7 @@ export const profile = {
   gmailCompose:
     "https://mail.google.com/mail/?view=cm&fs=1&to=" +
     encodeURIComponent("kduyyy193.for.dev@gmail.com"),
-  location: "Tan Binh, Ho Chi Minh City, Vietnam",
+  location: "Binh Trung, Ho Chi Minh City, Vietnam",
   cvViewUrl: "/NKDCV.pdf",
   cvDownloadUrl: "/NKDCV.pdf",
   cvDownloadName: "Nguyen-Khanh-Duy-CV.pdf",
@@ -62,16 +63,15 @@ export const skills = [
   "React",
   "Next.js",
   "FastAPI",
-  "MySQL",
-  "PostgreSQL",
-  "MongoDB",
-  "Redis",
-  "Weaviate",
-  "Pinecone",
+  "SQL",
+  "NoSQL",
+  "In-Memory DB",
+  "Vector DB",
+  "Graph DB",
+  "RAG",
+  "Knowledge Graph",
   "Docker",
   "RabbitMQ",
-  "WebSocket",
-  "Socket.IO",
   "Git",
   "Jenkins",
   "Unit Testing",
@@ -79,159 +79,85 @@ export const skills = [
 
 export const achievements = [
   { icon: "work", text: "3+ years experience" },
-  { icon: "apps", text: "1000+ orders/hour POS throughput" },
-  { icon: "code", text: "~40% latency reduction on POS flows" },
-  { icon: "deploy", text: "Multi-tenant AI platform in production" },
+  { icon: "deploy", text: "Production multi-tenant AI agent platform" },
+  { icon: "apps", text: "ERP delivered across construction, legal & education" },
+  { icon: "code", text: "Hybrid Knowledge Graph + vector retrieval" },
 ];
 
 export const education = {
-  degree: "Bachelor of Information Technology",
+  degree: "Information Technology",
   school: "Can Tho University — Can Tho, Vietnam",
-  period: "2025 - Present",
+};
+
+export const experienceGroup = {
+  company: "Levinci Co., Ltd",
+  role: "Software Engineer",
+  period: { start: "01/2023", end: "Present" } as Period,
 };
 
 export const experiences: Experience[] = [
   {
     id: "levinci-ai",
     title: "Internal AI Agent Platforms",
-    subtitle: "Levinci Co., Ltd · Fullstack Developer",
-    period: { start: "07/2025", end: "Present" },
-    applications: [
-      "Semantic search & contextual Q&A",
-      "Multi-tenant workspace platform",
-      "License & role management",
-      "SaaS billing & subscriptions",
-    ],
+    subtitle: "Levinci Co., Ltd · Software Engineer",
+    accentColor: "#7C3AED",
     built: [
-      "Built semantic search and contextual understanding with Weaviate, Pinecone, OpenAI APIs, and DeepSeek (self-hosted).",
-      "Designed multi-tenant architecture with PostgreSQL + Redis, ensuring efficient data isolation and workspace scalability.",
-      "Implemented license & role management with NestJS, enabling secure enterprise operations.",
-      "Integrated SaaS billing with Paddle Checkout—subscription plans, license activation, and automated payment handling.",
-    ],
-    users: [
-      "Enterprise teams",
-      "Workspace administrators",
-      "Licensed end users",
+      "Designed hybrid retrieval architecture combining Knowledge Graph and vector search, optimized with caching and parallel processing to balance answer accuracy and response speed.",
+      "Built internal multi-agent AI framework with role-based workflows, enabling teams to build projects collaboratively with AI agents.",
+      "Designed multi-tenant architecture and enterprise-grade license/role management, ensuring secure data isolation across workspaces.",
     ],
     highlights: [
-      "Production AI agent stack",
-      "Secure multi-tenant data isolation",
-      "Automated billing & licensing",
+      "Hybrid Knowledge Graph + vector retrieval",
+      "Multi-agent framework with role-based workflows",
+      "Multi-tenant, secure data isolation",
     ],
   },
   {
     id: "levinci-pos",
     title: "POS Systems",
     subtitle: "Levinci Co., Ltd · Retail & F&B",
-    period: { start: "05/2024", end: "07/2025" },
-    applications: [
-      "Point-of-sale (tablet / counter)",
-      "Menu & order management",
-      "Multi-device sync layer",
-    ],
+    accentColor: "#EA580C",
     built: [
-      "Developed synchronized order and menu updates across multiple devices using WebSocket + Redis Pub/Sub.",
-      "Optimized transaction flows for data consistency and reliability during peak hours (1000+ orders/hour).",
-      "Reduced operational latency by ~40%, delivering a smoother experience in fast-paced retail and F&B environments.",
-    ],
-    users: [
-      "Retail & F&B operators",
-      "Cashiers and store staff",
-      "Peak-hour order workflows",
-    ],
-    stats: [
-      { value: "1000+", label: "orders/hour" },
-      { value: "~40%", label: "latency reduced" },
-      { value: "Real-time", label: "device sync" },
-    ],
-    statsNote: "WebSocket + Redis Pub/Sub for cross-device consistency.",
-  },
-  {
-    id: "levinci-erp",
-    title: "ERP Systems",
-    subtitle: "Levinci Co., Ltd · Fullstack Developer",
-    period: { start: "08/2024", end: "03/2025" },
-    applications: [
-      "Workflow automation",
-      "Modular service architecture",
-      "External API integrations",
-    ],
-    built: [
-      "Automated enterprise workflows using NestJS + Redis queues, streamlining complex processes.",
-      "Refactored monolithic services into modular components, improving scalability and maintainability.",
-      "Integrated external APIs (payment, logistics) with secure token-based authentication.",
-    ],
-    users: [
-      "Enterprise operations teams",
-      "Internal admins",
-      "Integrated third-party services",
+      "Implemented local state persistence for cart/order data, allowing POS to continue operating during network interruptions and auto-sync once reconnected.",
+      "Built optimistic UI updates for cart and checkout actions, giving instant visual feedback while confirming with server in the background.",
+      "Structured frontend state management to handle multiple concurrent orders/tables without UI lag or state conflicts.",
     ],
     highlights: [
-      "Queue-based workflow automation",
-      "Modular, maintainable services",
-    ],
-  },
-  {
-    id: "goodlaw",
-    title: "GoodLaw",
-    subtitle: "Legal Tech · Fullstack Developer",
-    period: { start: "01/2024", end: "05/2024" },
-    applications: [
-      "React.js admin dashboard",
-      "Case management UI",
-      "Consultation booking flows",
-    ],
-    built: [
-      "Developed and maintained the responsive React.js admin website for managing legal cases and consultations.",
-      "Implemented fullstack features for authentication, case management, and consultation booking across web clients.",
-      "Integrated REST and GraphQL APIs for data synchronization between front-end and backend services.",
-      "Built reusable UI components and API-facing modules for lawyers, case managers, and admin staff.",
-    ],
-    users: [
-      "Legal clients",
-      "Lawyers",
-      "Legal advisors",
-      "Case managers",
-      "Admin staff",
-    ],
-    stats: [
-      { value: "1K+", label: "downloads" },
-      { value: "500+", label: "active users" },
-      { value: "100+", label: "cases managed" },
-    ],
-    statsNote: "Legal platform used in production across mobile and web.",
-    team: [
-      "2 Fullstack Developers",
-      "2 Backend Developers",
-      "1 QA",
-      "1 Designer",
-      "1 BA",
+      "Offline-first with auto-sync",
+      "Optimistic UI for cart & checkout",
+      "Concurrent multi-table order handling",
     ],
   },
   {
     id: "levinci-social",
     title: "Social Platforms",
-    subtitle: "Levinci Co., Ltd · Fullstack Developer",
-    period: { start: "01/2023", end: "01/2024" },
-    applications: [
-      "Real-time messaging",
-      "Push notifications",
-      "SEO-driven content delivery",
-      "CV builder",
-    ],
+    subtitle: "Levinci Co., Ltd · Software Engineer",
+    accentColor: "#DB2777",
     built: [
-      "Built real-time messaging and notifications with Socket.IO, supporting large-scale user interactions.",
-      "Operated on a high-traffic Node.js server architecture optimized for SEO-driven content delivery.",
-      "Developed a CV builder that generated resumes from user data using customizable templates and dynamic layout rendering with Canvas.",
-    ],
-    users: [
-      "Platform end users",
-      "Content consumers",
-      "Job seekers using CV builder",
+      "Built timestamp-based product tagging for masterclass video content, enabling in-video shopping tied to lesson context.",
+      "Developed CV builder with dynamic Canvas rendering, generating resumes from user data across multiple customizable templates.",
+      "Optimized news feed delivery with Redis caching and cursor-based pagination, reducing database load under high-traffic conditions.",
     ],
     highlights: [
-      "Large-scale real-time interactions",
-      "SEO-optimized Node.js architecture",
+      "In-video shopping via timestamp tagging",
+      "Canvas-based CV builder",
+      "Redis-cached, cursor-paginated news feed",
+    ],
+  },
+  {
+    id: "levinci-erp",
+    title: "ERP Systems",
+    subtitle: "Levinci Co., Ltd · Software Engineer",
+    accentColor: "#059669",
+    built: [
+      "(Construction) Built cost-tracking module comparing budgeted vs. actual spend per work item, surfacing overruns before end-of-phase reporting.",
+      "(Legal) Automated legal deadline reminders, reducing risk of missed filing/procedural dates.",
+      "(Education) Built room allocation system for dormitory check-in/check-out cycles, automating bed assignment based on capacity and eligibility rules.",
+    ],
+    highlights: [
+      "Multi-domain ERP: construction, legal, education",
+      "Automated compliance & deadline tracking",
+      "Rules-based room/bed allocation",
     ],
   },
 ];

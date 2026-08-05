@@ -39,6 +39,32 @@ import { profile } from "../data/portfolio";
         icon?.classList.toggle("collapsed", collapsed);
       });
     });
+
+    document.querySelectorAll(".timeline-toggle-group").forEach((button) => {
+      button.addEventListener("click", () => {
+        const ids = (button.getAttribute("data-toggle-group") || "")
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+        if (!ids.length) return;
+
+        const anyExpanded = ids.some((id) => {
+          const content = document.querySelector(`[data-content-for="${id}"]`);
+          return content && !content.classList.contains("collapsed");
+        });
+
+        ids.forEach((id) => {
+          const content = document.querySelector(`[data-content-for="${id}"]`);
+          const cardIcon = document.querySelector(
+            `[data-toggle-for="${id}"] .toggle-icon`
+          );
+          content?.classList.toggle("collapsed", anyExpanded);
+          cardIcon?.classList.toggle("collapsed", anyExpanded);
+        });
+
+        button.querySelector(".toggle-icon")?.classList.toggle("collapsed", anyExpanded);
+      });
+    });
   }
 
   setupTimelineToggles();
