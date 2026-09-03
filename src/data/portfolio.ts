@@ -35,7 +35,7 @@ export const profile = {
   name: "Nguyen Khanh Duy",
   title: "Software Engineer",
   titleNote: "3+ years experience",
-  avatar: "/images/avatar.png",
+  avatar: "/images/me.jpg",
   avatarPosition: "50% 20%",
   about:
     "Software Engineer with 3+ years of experience building production systems across AI agent platforms, POS, social products, and ERP. Skilled in NestJS, React/Next.js, and data-intensive backends—with focus on hybrid retrieval (Knowledge Graph + vector search), multi-agent orchestration, multi-tenant architecture, and real-time, resilient workflows.",
