@@ -241,6 +241,9 @@ import {
           {education.degree}
         </p>
         <p class="text-gray-600 dark:text-gray-400 text-sm m-0">{education.school}</p>
+        {education.periodLabel && (
+          <p class="text-gray-500 dark:text-gray-500 text-sm m-0">{education.periodLabel}</p>
+        )}
       </div>
     </div>
 

@@ -2,8 +2,15 @@ import type { Period } from "../utils/period";
 
 export type { Period };
 
+export type ExperienceGroup = {
+  company: string;
+  role: string;
+  period: Period;
+};
+
 export type Experience = {
   id: string;
+  company: string;
   title: string;
   subtitle?: string;
   period?: Period;
@@ -34,11 +41,11 @@ export type SideProject = {
 export const profile = {
   name: "Nguyen Khanh Duy",
   title: "Software Engineer",
-  titleNote: "3+ years experience",
+  titleNote: "3.5+ years experience",
   avatar: "/images/me.jpg",
   avatarPosition: "50% 20%",
   about:
-    "Software Engineer with 3+ years of experience building production systems across AI agent platforms, POS, social products, and ERP. Skilled in NestJS, React/Next.js, and data-intensive backends—with focus on hybrid retrieval (Knowledge Graph + vector search), multi-agent orchestration, multi-tenant architecture, and real-time, resilient workflows.",
+    "Software Engineer with 3.5+ years of experience building production systems across AI agent platforms, POS, social products, and ERP. Currently an Agentic Engineer at Dream Talent, building internal AI agent tooling and a Forum + CRM platform. Skilled in NestJS, React/Next.js, and data-intensive backends—with focus on hybrid retrieval (Knowledge Graph + vector search), multi-agent orchestration, multi-tenant architecture, and real-time, resilient workflows.",
   phone: "+84 985 308 170",
   phoneTel: "tel:+84985308170",
   linkedin: "",
@@ -81,26 +88,53 @@ export const skills = [
 ];
 
 export const achievements = [
-  { icon: "work", text: "3+ years experience" },
+  { icon: "work", text: "3.5+ years experience" },
   { icon: "deploy", text: "5+ workspace multi-tenant AI platform, zero cross-tenant incidents" },
   { icon: "apps", text: "ERP delivered across construction, legal & education" },
   { icon: "code", text: "Hybrid retrieval: ~85–90% accuracy, ~1.5–2s TTFT" },
+  { icon: "deploy", text: "Forum + CRM shipped in 1.5 months vs. ~6-month estimate (~75% faster)" },
 ];
 
 export const education = {
-  degree: "Information Technology",
+  degree: "Information Technology (Distance Learning)",
   school: "Can Tho University — Can Tho, Vietnam",
+  periodLabel: "2025 – 2028",
 };
 
-export const experienceGroup = {
-  company: "Levinci Co., Ltd",
-  role: "Software Engineer",
-  period: { start: "01/2023", end: "Present" } as Period,
-};
+export const experienceGroups: ExperienceGroup[] = [
+  {
+    company: "Dream Talent Co., Ltd",
+    role: "Agentic Engineer",
+    period: { start: "07/2026", end: "Present" },
+  },
+  {
+    company: "Levinci Co., Ltd",
+    role: "Software Engineer",
+    period: { start: "01/2023", end: "07/2026" },
+  },
+];
 
 export const experiences: Experience[] = [
   {
+    id: "dreamtalent-agentic",
+    company: "Dream Talent Co., Ltd",
+    title: "Agentic Engineering & Internal Tooling",
+    subtitle: "Dream Talent Co., Ltd · Agentic Engineer",
+    accentColor: "#2563EB",
+    built: [
+      "Built an internal skill/workflow system for a 5-person engineering team, covering the full delivery pipeline from Figma-to-UI implementation (~95% design fidelity) to reusable component patterns, making new projects easy to spin up and maintain.",
+      "Leveraged this internal skill framework to build a Forum + CRM system end-to-end (frontend and backend), cutting delivery time from an estimated ~6 months to 1.5 months (~75% faster).",
+      "Contributed to an internal AI Assistant built on a multi-agent + orchestrator architecture, designing a multi-step verification flow that traded off some latency to prioritize response accuracy.",
+    ],
+    highlights: [
+      "5-person team, Figma-to-UI at ~95% design fidelity",
+      "Forum + CRM: 1.5 months vs. ~6-month estimate",
+      "AI Assistant: multi-agent + orchestrator, accuracy-first flow",
+    ],
+  },
+  {
     id: "levinci-ai",
+    company: "Levinci Co., Ltd",
     title: "Internal AI Agent Platforms",
     subtitle: "Levinci Co., Ltd · Software Engineer",
     accentColor: "#7C3AED",
@@ -119,6 +153,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "levinci-pos",
+    company: "Levinci Co., Ltd",
     title: "POS Systems",
     subtitle: "Levinci Co., Ltd · Retail & F&B",
     accentColor: "#EA580C",
@@ -135,6 +170,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "levinci-social",
+    company: "Levinci Co., Ltd",
     title: "Social Platforms",
     subtitle: "Levinci Co., Ltd · Software Engineer",
     accentColor: "#DB2777",
@@ -151,6 +187,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "levinci-erp",
+    company: "Levinci Co., Ltd",
     title: "ERP Systems",
     subtitle: "Levinci Co., Ltd · Software Engineer",
     accentColor: "#059669",
